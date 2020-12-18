@@ -1,11 +1,19 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <div id="app" class="bg-gray-100">
+      <navbar/>
+
+      
+
+    
     <router-view />
   </div>
 </template>
-
+<script>
+import navbar from "@/components/navbar/navbar";
+export default {
+  components:{
+    navbar
+  }
+}
+</script>
 <style src="./assets/css/tailwind.css"/>
