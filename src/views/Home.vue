@@ -8,7 +8,7 @@
 <script>
 // @ is an alias to /src
 /* import HelloWorld from "@/components/HelloWorld.vue"; */
-import service from '../services/service.js';
+import products from '../services/products.js';
 export default {
   name: "Home",
   components: {
@@ -19,7 +19,7 @@ export default {
   }},
   methods:{
     async getProducts(){
-      await service.myApi.get('product').then((response) => {
+      await products.get().then((response) => {
           const data = response.data;
           this.productos = data.data;
           console.log(this.productos);

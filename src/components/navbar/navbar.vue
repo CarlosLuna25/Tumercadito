@@ -61,16 +61,16 @@
         </button>
       </div>
       <div class="flex ">
-        <a
-          href="#"
+        <router-link
+          to="/register"
           class="block text-md px-4 py-2 rounded text-white ml-2 font-bold hover:text-white mt-4 hover:bg-green-600 lg:mt-0"
-          >Sign in</a
+          >Sign in</router-link
         >
 
-        <a
-          href="#"
+        <router-link
+          to="/login"
           class=" block text-md px-4  ml-2 py-2 rounded text-white font-bold hover:text-white mt-4 hover:bg-blue-900 lg:mt-0"
-          >login</a
+          >login</router-link
         >
       </div>
     </div>
