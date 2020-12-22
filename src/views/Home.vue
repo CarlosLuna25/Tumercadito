@@ -1,13 +1,14 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/images/logo.png" />
+    
+    HELLOOO
     
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-/* import HelloWorld from "@/components/HelloWorld.vue"; */
+
 import products from '../services/products.js';
 export default {
   name: "Home",
@@ -21,7 +22,7 @@ export default {
     async getProducts(){
       await products.get().then((response) => {
           const data = response.data;
-          this.productos = data.data;
+          this.productos = data.data; //=> response.data.data
           console.log(this.productos);
           
         })

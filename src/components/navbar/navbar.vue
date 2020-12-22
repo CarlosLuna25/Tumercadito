@@ -61,7 +61,8 @@
         </button>
       </div>
       <div class="flex ">
-        <router-link
+       <div v-if="!islogged" class="flex">
+          <router-link
           to="/register"
           class="block text-md px-4 py-2 rounded text-white ml-2 font-bold hover:text-white mt-4 hover:bg-green-600 lg:mt-0"
           >Sign in</router-link
@@ -72,7 +73,35 @@
           class=" block text-md px-4  ml-2 py-2 rounded text-white font-bold hover:text-white mt-4 hover:bg-blue-900 lg:mt-0"
           >login</router-link
         >
+       </div>
+       <div v-else class="flex">
+
+           <router-link
+          to="/"
+          class="block text-md px-4 py-2 rounded text-white ml-2 font-bold hover:text-white mt-4 hover:bg-green-600 lg:mt-0"
+          >Bienvenido {{userInfo.name}} </router-link>
+          <button
+          @click="logout()"
+          class="block text-md px-4 py-2 rounded text-white ml-2 font-bold hover:text-white mt-4 hover:bg-green-600 lg:mt-0"
+          >Logout </button>
+
+       </div>
       </div>
     </div>
   </nav>
 </template>
+
+<script>
+import { mapState } from "vuex";
+export default {
+  computed:{
+    ...mapState(['islogged','userInfo']),
+  },
+  methods:{
+    logout(){
+      this.$store.dispatch('logout');
+      
+    }
+  }
+}
+</script>
