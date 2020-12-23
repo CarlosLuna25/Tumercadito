@@ -9,35 +9,55 @@ export default new Vuex.Store({
     islogged:false,
     currentUser:{},
     userInfo:{},
-    userToken:"Bearer "
+    
 
   },
   mutations: {
     SET_CURRENT_USER(state, user) { //guarda el usuario identidficado en el localstorage.
       state.currentUser = user;
       window.localStorage.currentUser = JSON.stringify(user);
-      window.localStorage.userInfo = JSON.stringify(user);
+     
     },
     LOGOUT_USER(state) { //elimina los archivos del locaStorage
       state.currentUser = {};
       state.userInfo={};
       state.islogged=false;
-      window.localStorage.currentUser = JSON.stringify({});
+      window.localStorage.clear();
     },
+    SET_USER_INFO(state, userInfo){
+      state.userInfo= userInfo;
+      state.currentUser=JSON.parse(window.localStorage.getItem('currentUser'));
+     
+    }
 
   },
   actions: {
+    async GetUserInfo({commit},token,user=null){
+      try {
+        let response= await User.GetUserInfo(token);
+        let userInfo=response.data.data;
+        if (user!=null) {
+          commit('SET_USER_INFO',userInfo,user);
+        }else{
+          commit('SET_USER_INFO',userInfo);
+        }
+        
+      } catch (e) {
+          console.log(e);
+      }
+    },
 
-    async loginUser({commit}, loginInfo) {
+    async loginUser({commit,dispatch}, loginInfo) {
       try {
         let response = await Auth.login(loginInfo);
         let user = response.data.data;
         //obtener informacion del usuario
       
         commit('SET_CURRENT_USER', user); 
-        let userInfo= await User.GetUserInfo(this.state.currentUser.access_token);
-        this.state.userInfo= userInfo.data.data;
+      
+       await dispatch('GetUserInfo',this.state.currentUser.access_token);
         this.state.islogged=true;
+        console.log(user)
         
         return user;
       } catch {
