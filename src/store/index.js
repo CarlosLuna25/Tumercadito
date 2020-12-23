@@ -26,6 +26,7 @@ export default new Vuex.Store({
     },
     SET_USER_INFO(state, userInfo){
       state.userInfo= userInfo;
+      state.islogged=true;
       state.currentUser=JSON.parse(window.localStorage.getItem('currentUser'));
      
     }
@@ -57,7 +58,7 @@ export default new Vuex.Store({
       
        await dispatch('GetUserInfo',this.state.currentUser.access_token);
         this.state.islogged=true;
-        console.log(user)
+        
         
         return user;
       } catch {

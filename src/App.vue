@@ -32,8 +32,8 @@ export default {
   },
   async beforeCreate(){
      let token= JSON.parse(window.localStorage.getItem('currentUser'));
-     console.log(token)
-      if (token.access_token!=null) {
+    
+      if (token!=null) {
         this.$store.state.islogged=true;
        await this.$store.dispatch('GetUserInfo', token.access_token);
         console.log('Usuario: '+ this.userInfo.name);}
